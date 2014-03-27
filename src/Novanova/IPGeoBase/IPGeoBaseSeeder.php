@@ -5,14 +5,18 @@ namespace Novanova\IPGeoBase;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class IpgeobaseSeeder extends Seeder
+/**
+ * Class IPGeoBaseSeeder
+ * @package Novanova\IPGeoBase
+ */
+class IPGeoBaseSeeder extends Seeder
 {
 
     public function run()
     {
         if (file_exists(__DIR__ . '/cities.txt') && file_exists(__DIR__ . '/cidr_optim.txt')) {
 
-            DB::table('ipgeobase_cities')->delete();
+            DB::table('ip_geo_base__cities')->delete();
 
             $file = file(__DIR__ . '/cities.txt');
             $pattern = '#(\d+)\s+(.*?)\t+(.*?)\t+(.*?)\t+(.*?)\s+(.*)#';
@@ -20,7 +24,7 @@ class IpgeobaseSeeder extends Seeder
             DB::beginTransaction();
             foreach ($file as $row) {
                 if (preg_match($pattern, $row, $out)) {
-                    DB::table('ipgeobase_cities')->insert(
+                    DB::table('ip_geo_base__cities')->insert(
                         array(
                             'id' => $out[1],
                             'city' => $out[2],
@@ -35,7 +39,7 @@ class IpgeobaseSeeder extends Seeder
             }
             DB::commit();
 
-            DB::table('ipgeobase_base')->delete();
+            DB::table('ip_geo_base__base')->delete();
 
             $file = file(__DIR__ . '/cidr_optim.txt');
             $pattern = '#(\d+)\s+(\d+)\s+(\d+\.\d+\.\d+\.\d+)\s+-\s+(\d+\.\d+\.\d+\.\d+)\s+(\w+)\s+(\d+|-)#';
@@ -43,7 +47,7 @@ class IpgeobaseSeeder extends Seeder
             DB::beginTransaction();
             foreach ($file as $row) {
                 if (preg_match($pattern, $row, $out)) {
-                    DB::table('ipgeobase_base')->insert(
+                    DB::table('ip_geo_base__base')->insert(
                         array(
                             'long_ip1' => $out[1],
                             'long_ip2' => $out[2],
@@ -57,13 +61,13 @@ class IpgeobaseSeeder extends Seeder
             }
             DB::commit();
 
-            $cities = DB::table('ipgeobase_cities')
-                ->join('ipgeobase_base', 'ipgeobase_cities.id', '=', 'ipgeobase_base.city_id')
-                ->select('ipgeobase_cities.id', 'ipgeobase_base.country')->get();
+            $cities = DB::table('ip_geo_base__cities')
+                ->join('ip_geo_base__base', 'ip_geo_base__cities.id', '=', 'ip_geo_base__base.city_id')
+                ->select('ip_geo_base__cities.id', 'ip_geo_base__base.country')->get();
 
             DB::beginTransaction();
             foreach ($cities as $city) {
-                DB::table('ipgeobase_cities')
+                DB::table('ip_geo_base__cities')
                     ->where('id', $city->id)
                     ->update(array('country' => $city->country));
             }

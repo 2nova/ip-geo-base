@@ -4,7 +4,11 @@ namespace Novanova\IPGeoBase;
 
 use Illuminate\Support\ServiceProvider;
 
-class IpgeobaseServiceProvider extends ServiceProvider
+/**
+ * Class IPGeoBaseServiceProvider
+ * @package Novanova\IPGeoBase
+ */
+class IPGeoBaseServiceProvider extends ServiceProvider
 {
 
     /**
@@ -21,7 +25,7 @@ class IpgeobaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('novanova/ipgeobase');
+        $this->package('2nova/ip-geo-base');
     }
 
     /**

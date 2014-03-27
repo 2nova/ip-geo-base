@@ -4,9 +4,16 @@ namespace Novanova\IPGeoBase;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class City
+ * @package Novanova\IPGeoBase
+ */
 class City extends Model
 {
 
-    protected $table = 'ipgeobase_cities';
+    /**
+     * @var string
+     */
+    protected $table = 'ip_geo_base__cities';
 
 }

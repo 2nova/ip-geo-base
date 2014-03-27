@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIpgeobaseTables extends Migration
+class CreateIPGeoBaseTables extends Migration
 {
 
     /**
@@ -13,7 +13,7 @@ class CreateIpgeobaseTables extends Migration
     public function up()
     {
         Schema::create(
-            'ipgeobase_cities',
+            'ip_geo_base__cities',
             function ($table) {
                 $table->increments('id')->unsigned();
                 $table->string('city', 128);
@@ -26,7 +26,7 @@ class CreateIpgeobaseTables extends Migration
             }
         );
         Schema::create(
-            'ipgeobase_base',
+            'ip_geo_base__base',
             function ($table) {
                 $table->increments('id')->unsigned();
                 $table->bigInteger('long_ip1')->unsigned();
@@ -37,7 +37,7 @@ class CreateIpgeobaseTables extends Migration
                 $table->integer('city_id')->unsigned()->nullable()->default(null);
                 $table->index(array('long_ip1', 'long_ip2'));
                 $table->foreign('city_id')
-                    ->references('id')->on('ipgeobase_cities')
+                    ->references('id')->on('ip_geo_base__cities')
                     ->onUpdate('cascade')
                     ->onDelete('set null');
             }
@@ -51,8 +51,8 @@ class CreateIpgeobaseTables extends Migration
      */
     public function down()
     {
-        Schema::drop('ipgeobase_base');
-        Schema::drop('ipgeobase_cities');
+        Schema::drop('ip_geo_base__base');
+        Schema::drop('ip_geo_base__cities');
     }
 
 }
