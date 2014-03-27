@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIPGeoBaseTables extends Migration
+class CreateIpgeobaseTables extends Migration
 {
 
     /**
