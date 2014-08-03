@@ -54,7 +54,7 @@ class IPGeoBaseSeeder extends Seeder
                             'ip1' => $out[3],
                             'ip2' => $out[4],
                             'country' => $out[5],
-                            'city_id' => is_numeric($out[6]) && 0 < (int)$out[6] ? (int)$out[6] : null
+                            'city_id' => is_numeric($out[6]) && 0 < (int) $out[6] ? (int) $out[6] : null
                         )
                     );
                 }
