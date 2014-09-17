@@ -3,7 +3,7 @@
     "description": "IP geo base Laravel package based on  http://ipgeobase.ru",
     "license": "MIT",
     "keywords": ["ipgeobase"],
-    "version": "0.9.10",
+    "version": "0.9.11",
     "authors": [
         {
             "name": "Ivan Nikitin",
